@@ -1,0 +1,25 @@
+<h1>Share a link</h1>
+
+<form action="<%= links_url %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label for="title">Title:</label> <br>
+  <input type="text" name="link[title]" id="title"> <br>
+
+  <label for="url">URL:</label> <br>
+  <input type="text" name="link[url]" id="title"> <br>
+
+  <label for="description">Description:</label> <br>
+  <textarea name="link[description]" id="description" cols="30" rows="10"></textarea> <br>
+
+  <% unless @all_subs.empty? %>
+    Select Subs: <br>
+    <% @all_subs.each do |sub| %>
+      <small><%= sub.name %>:</small>
+      <input type="checkbox" name="link[sub_ids][]" value="<%= sub.id %>"> <br>
+    <% end %>
+  <% end %>
+
+  <input type="hidden" name="link[owner_id]" value="<%= current_user.id %>">
+  <input type="submit" value="Share Link">
+</form>

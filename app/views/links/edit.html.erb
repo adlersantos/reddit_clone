@@ -1,0 +1,34 @@
+<h3>Edit link</h3>
+
+<form action="<%= link_url %>" method="post">
+  <input type="hidden" name="_method" value="put">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label for="title">Title:</label> <br>
+  <input type="text" name="link[title]" id="title" value="<%= @link.title %>"> <br>
+
+  <label for="url">URL:</label> <br>
+  <input type="text" name="link[url]" id="url" value="<%= @link.url %>"> <br>
+
+  <label for="description">Description:</label> <br>
+  <textarea name="link[description]" id="description" cols="30" rows="10"><%= @link.description %></textarea> <br>
+
+  <% unless @all_subs.empty? %>
+    Select Subs: <br>
+    <% @all_subs.each do |sub| %>
+      <small><%= sub.name %>:</small>
+      <input type="checkbox"
+             name="link[sub_ids][]"
+             value="<%= sub.id %>"
+             <% if @link.subs.include?(sub) %>
+               checked
+             <% end %>
+      >
+      <input type="hidden" name="link[sub_ids][]" value="">
+      <br>
+    <% end %>
+  <% end %>
+
+  <input type="hidden" name="link[owner_id]" value="<%= current_user.id %>">
+  <input type="submit" value="Update Link">
+</form>

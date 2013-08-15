@@ -1,0 +1,27 @@
+<h1>Create Sub</h1>
+
+<form action="<%= subs_url %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label for="sub_name">Name:</label>
+  <input type="text" name="sub[name]"> <br>
+  <br>
+
+  <% 3.times.each do |index| %>
+    <label for="">Name:</label>
+    <input type="hidden" name="sub[links_attributes][<%= index %>][title]" value="">
+    <input type="text" name="sub[links_attributes][<%= index %>][title]"> <br>
+
+    <label for="">URL:</label>
+    <input type="hidden" name="sub[links_attributes][<%= index %>][url]" value="">
+    <input type="text" name="sub[links_attributes][<%= index %>][url]"> <br>
+
+    <label for="">Description:</label> <br>
+    <input type="hidden" name="sub[links_attributes][<%= index %>][description]" value="">
+    <textarea name="sub[links_attributes][<%= index %>][description]"></textarea> <br>
+  <% end %>
+  <br>
+
+  <input type="hidden" name="sub[moderator_id]" value="<%= current_user.id %>">
+  <input type="submit" value="Create Sub">
+</form>

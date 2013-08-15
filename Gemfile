@@ -10,6 +10,8 @@ gem 'pry-rails'
 gem 'bcrypt-ruby'
 gem 'binding_of_caller'
 gem 'better_errors'
+gem 'webrick'
+gem 'debugger'
 
 # Gems used only for assets and not required
 # in production environments by default.
