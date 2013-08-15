@@ -1,0 +1,16 @@
+<h1>Profile page: <%= current_user.username %></h1>
+
+<h4>Subs you're moderating:</h4>
+<% @user.owned_subs.each do |sub| %>
+  <%= link_to "#{sub.name}", sub_url(sub) %> <br>
+<% end %>
+<br>
+
+<h4>Links you submitted:</h4>
+<% @user.shared_links.each do |link| %>
+  <%= link.title %> <%= link_to "Edit", edit_link_url(link) %><br>
+<% end %>
+<br>
+
+<%= link_to "Create New Sub", new_sub_url %> <br>
+<%= link_to "Submit New Link", new_link_url %>

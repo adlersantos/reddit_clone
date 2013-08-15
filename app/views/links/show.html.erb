@@ -1,0 +1,32 @@
+<h3>Link: <%= @link.title %></h3>
+
+URL: <%= @link.url %> <br>
+Description: <br>
+<pre>
+  <%= @link.description %>
+</pre>
+
+Comments: <br>
+<ul>
+<% @link.comments.each do |comment| %>
+  <li><%= comment.body %> - <%= comment.author.username %></li>
+<% end %>
+</ul>
+
+<form action="<%= comments_url %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <small>Add comment</small><br>
+  <textarea name="comment[body]" id="" cols="15" rows="5"></textarea>
+
+  <input type="hidden" name="comment[author_id]" value="<%= current_user.id %>">
+  <input type="hidden" name="comment[link_id]" value="<%= @link.id %>"> <br>
+  <input type="submit" value="Add Comment">
+</form> <br>
+
+Included in the following subs: <br>
+<ul>
+  <% @link.subs.each do |sub| %>
+    <li><%= sub.name %></li>
+  <% end %>
+</ul>

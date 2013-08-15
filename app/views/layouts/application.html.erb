@@ -7,8 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% if current_user %>
+    You are logged in as <%= link_to current_user.username, user_url(current_user) %>
+    <form action="<%= session_url %>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="Logout">
+    </form>
+  <% end %>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>
