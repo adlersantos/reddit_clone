@@ -15,6 +15,15 @@ class Link < ActiveRecord::Base
     :primary_key => :id,
     :foreign_key => :link_id
 
+  has_many :votes,
+    :class_name => "UserVote",
+    :primary_key => :id,
+    :foreign_key => :link_id
+
+  has_many :voters,
+    :through => :votes,
+    :source => :voter
+
   belongs_to :owner,
     :class_name => "User",
     :primary_key => :id,

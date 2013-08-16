@@ -7,7 +7,5 @@ class CreateUserVotes < ActiveRecord::Migration
 
       t.timestamps
     end
-
-    add_index :user_id, :link_id
   end
 end

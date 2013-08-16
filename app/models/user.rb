@@ -20,6 +20,15 @@ class User < ActiveRecord::Base
     :primary_key => :id,
     :foreign_key => :author_id
 
+  has_many :votes,
+    :class_name => "UserVote",
+    :primary_key => :id,
+    :foreign_key => :user_id
+
+  has_many :voted_links,
+    :through => :votes,
+    :source => :link
+
   def password
     @password ||= Password.new(password_hash)
   end
