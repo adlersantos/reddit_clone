@@ -7,11 +7,10 @@ Description: <br>
 </pre>
 
 Comments: <br>
-<ul>
-<% @link.comments.each do |comment| %>
-  <li><%= comment.body %> - <%= comment.author.username %></li>
+<% @link.comments_by_parent[nil].each do |comment| %>
+  <%= comment.body %>
+  <%= render "comment", :parent => comment, :comments_by_parent => @link.comments_by_parent %>
 <% end %>
-</ul>
 
 <form action="<%= comments_url %>" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">

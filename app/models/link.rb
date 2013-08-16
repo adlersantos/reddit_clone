@@ -19,4 +19,23 @@ class Link < ActiveRecord::Base
     :class_name => "User",
     :primary_key => :id,
     :foreign_key => :owner_id
+
+  def comments_by_parent
+    comments_by_parent = {}
+
+    top_comments = comments.where(:parent_comment_id => nil)
+    top_comments.each do |comment|
+      comments_by_parent[nil] ||= []
+      comments_by_parent[nil] << comment
+    end
+
+    child_comments = comments.all - top_comments
+    child_comments.each do |comment|
+      parent_comment = Comment.find_by_id(comment.parent_comment_id)
+      comments_by_parent[parent_comment] ||= []
+      comments_by_parent[parent_comment] << comment
+    end
+
+    comments_by_parent
+  end
 end
