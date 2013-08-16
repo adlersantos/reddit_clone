@@ -21,6 +21,8 @@ class LinksController < ApplicationController
 
   def show
     @link = Link.find(params[:id])
+    @votes = @link.votes.where(:user_id => current_user.id, :link_id => @link.id)
+    @voted = (@votes.empty? ? false : true)
     @total_votes = @link.votes.inject(0) do |sum, vote|
       sum + vote.vote_value
     end
