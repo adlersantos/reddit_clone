@@ -12,13 +12,10 @@ class SubsController < ApplicationController
     #   @sub = Sub.new(params[:sub])
     #   @sub.save!
 
-    #   params[:sub][:links_attributes].each do |link|
-    #     debugger
-    #     next if (link[:title].blank? && link[:url].blank?)
+    #   params[:link].each do |link_params|
+    #     next if (link_params[:title].blank? && link_params[:url].blank?)
 
-    #     url = link[:url]
-
-    #     @link = Link.create!(link)
+    #     @link = Link.create!(link_params)
     #     SubJoinLink.create!(:link_id => @link.id, :sub_id => @sub.id)
     #   end
     # end

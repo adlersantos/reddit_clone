@@ -1,6 +1,23 @@
-<h3>Comment for <%= @link.title %></h3>
+<h3>Comment for link: <%= @link.title %></h3>
 
 <pre>
-  <%= @comment.body %>
+  <%= @comment.body %> - written by <%= link_to "#{@comment.author.username}", user_url(@comment.author) %>
 </pre>
 
+<% if @link.comments_by_parent[@comment] %>
+  <% @link.comments_by_parent[@comment].each do |comment| %>
+    <ul><%= render "comment", :parent => comment, :comments_by_parent => @link.comments_by_parent %></ul>
+  <% end %> <br>
+<% end %>
+
+<form action="<%= comments_url %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <textarea name="comment[body]" id="" cols="15" rows="5"></textarea> <br>
+
+  <input type="hidden" name="comment[author_id]" value="<%= current_user.id %>">
+  <input type="hidden" name="comment[link_id]" value="<%= @link.id %>">
+  <input type="hidden" name="comment[parent_comment_id]" value="<%= @comment.id %>">
+
+  <input type="submit" value="Add Comment" class="btn btn-primary">
+</form>

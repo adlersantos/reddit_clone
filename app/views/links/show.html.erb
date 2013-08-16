@@ -6,6 +6,15 @@ Description: <br>
   <%= @link.description %>
 </pre>
 
+<% unless @link.subs.empty? %>
+  Subs: <br>
+  <ul>
+    <% @link.subs.each do |sub| %>
+      <li><%= sub.name %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 Comments: <br>
 <% @link.comments_by_parent[nil].each do |comment| %>
   <ul><%= render "comment", :parent => comment, :comments_by_parent => @link.comments_by_parent %></ul>
@@ -14,18 +23,11 @@ Comments: <br>
 <form action="<%= comments_url %>" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
-  <small>Add comment</small><br>
   <textarea name="comment[body]" id="" cols="15" rows="5"></textarea>
 
   <input type="hidden" name="comment[author_id]" value="<%= current_user.id %>">
   <input type="hidden" name="comment[link_id]" value="<%= @link.id %>"> <br>
-  <input type="submit" value="Post Comment">
+  <input type="submit" value="Post Comment" class="btn btn-primary">
 </form> <br>
 
-Included in the following subs: <br>
-<ul>
-  <% @link.subs.each do |sub| %>
-    <li><%= sub.name %></li>
-  <% end %>
-</ul>
 
