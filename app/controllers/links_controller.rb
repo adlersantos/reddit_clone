@@ -10,9 +10,11 @@ class LinksController < ApplicationController
     ActiveRecord::Base.transaction do
       @link = Link.create!(params[:link])
 
-      @comment = Comment.new(params[:comment])
-      @comment.link_id = @link.id
-      @comment.save!
+      unless params[:comment][:body].blank?
+        @comment = Comment.new(params[:comment])
+        @comment.link_id = @link.id
+        @comment.save!
+      end
     end
     redirect_to link_url(@link)
   end
@@ -32,5 +34,15 @@ class LinksController < ApplicationController
     @link = Link.find(params[:id])
     @link.update_attributes(params[:link])
     redirect_to link_url(@link)
+  end
+
+  def upvote
+    @link = Link.find(params[:id])
+    ActiveRecord::Base.transaction do
+
+    end
+  end
+
+  def downvote
   end
 end

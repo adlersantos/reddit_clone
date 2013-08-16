@@ -15,10 +15,12 @@ Description: <br>
   </ul>
 <% end %>
 
-Comments: <br>
-<% @link.comments_by_parent[nil].each do |comment| %>
-  <ul><%= render "comment", :parent => comment, :comments_by_parent => @link.comments_by_parent %></ul>
-<% end %> <br>
+<% if @link.comments_by_parent[nil] %>
+  Comments: <br>
+  <% @link.comments_by_parent[nil].each do |comment| %>
+    <ul><%= render "comment", :parent => comment, :comments_by_parent => @link.comments_by_parent %></ul>
+  <% end %> <br>
+<% end %>
 
 <form action="<%= comments_url %>" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
