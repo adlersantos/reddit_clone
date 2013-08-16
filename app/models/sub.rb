@@ -16,4 +16,9 @@ class Sub < ActiveRecord::Base
     :source => :link
 
   accepts_nested_attributes_for :links, :reject_if => :all_blank
+
+  def sorted_links
+    links = self.links
+    links.sort{ |a, b| b.total_votes <=> a.total_votes }
+  end
 end

@@ -35,6 +35,11 @@ class SubsController < ApplicationController
     render :edit
   end
 
+  def index
+    @sorted_subs = Sub.all.sort_by { |sub| sub.name }
+    render :index
+  end
+
   def show
     @sub = Sub.find(params[:id])
     render :show

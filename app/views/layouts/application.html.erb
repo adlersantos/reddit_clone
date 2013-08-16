@@ -36,6 +36,8 @@
       <input type="hidden" name="_method" value="delete">
       <input type="submit" value="Logout" class="btn btn-warning btn-small">
     </form>
+
+    <h5><%= link_to "All links", links_url %> | <%= link_to "All subs", subs_url %></h5>
   <% end %>
 
   <%= yield %>

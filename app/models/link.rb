@@ -47,4 +47,8 @@ class Link < ActiveRecord::Base
 
     comments_by_parent
   end
+
+  def total_votes
+    self.votes.inject(0) { |sum, vote| sum + vote.vote_value }
+  end
 end
