@@ -1,6 +1,6 @@
 <h3>Link: <%= @link.title %></h3>
 
-<strong>URL:</strong> <%= @link.url %> <br>
+<strong>URL:</strong> &nbsp; <%= link_to "#{@link.url}", "http://#{@link.url}" %> <br>
 <strong>Description:</strong> <br>
 <pre>
   <%= @link.description %>
@@ -30,7 +30,7 @@
 
     <input type="submit" value="downvote" class="btn btn-danger btn-small">
   </form>
-<% end %>
+<% end  %>
 
 <% unless @link.subs.empty? %>
   Subs: <br>

@@ -21,12 +21,21 @@ class LinksController < ApplicationController
 
   def show
     @link = Link.find(params[:id])
-    @votes = @link.votes.where(:user_id => current_user.id, :link_id => @link.id)
+
+    @votes = @link.votes.where(
+               :user_id => current_user.id,
+               :link_id => @link.id
+               )
     @voted = (@votes.empty? ? false : true)
-    @total_votes = @link.votes.inject(0) do |sum, vote|
-      sum + vote.vote_value
-    end
+
+    @total_votes = @link.votes.inject(0) { |sum, vote| sum + vote.vote_value }
     render :show
+  end
+
+  def index
+    @links = Link.all
+    @sorted_links = @links.sort{ |a, b| b.total_votes <=> a.total_votes }
+    render :index
   end
 
   def edit

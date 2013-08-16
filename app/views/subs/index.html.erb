@@ -1,0 +1,16 @@
+<h2>Subs</h2>
+
+<strong><%= link_to "Create Sub", new_sub_url %></strong> <br> <br>
+
+<ul>
+  <% @sorted_subs.each do |sub| %>
+    <li>
+      <ul>
+        <%= link_to "#{sub.name}", sub_url(sub) %>
+        <% sub.sorted_links.each do |link| %>
+          <li><%= link_to "#{link.title}", link_url(link) %> - votes: <%= link.total_votes %></li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>
