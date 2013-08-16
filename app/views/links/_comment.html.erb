@@ -1,0 +1,6 @@
+<%= parent.body %> <br>
+<% if comments_by_parent[parent] %>
+  <% comments_by_parent[parent].each do |parent, children| %>
+    <%= render "comment", :parent => parent, :comments_by_parent => comments_by_parent %>
+  <% end %>
+<% end %>
