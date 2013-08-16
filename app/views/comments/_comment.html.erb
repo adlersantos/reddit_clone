@@ -1,0 +1,7 @@
+<li><%= parent.body %> - <%= link_to 'reply', comment_url(parent) %></li>
+
+<% if comments_by_parent[parent] %>
+  <% comments_by_parent[parent].each do |parent, children| %>
+    <ul><%= render "comment", :parent => parent, :comments_by_parent => comments_by_parent %></ul>
+  <% end %>
+<% end %>

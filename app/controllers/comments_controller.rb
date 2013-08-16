@@ -11,6 +11,7 @@ class CommentsController < ApplicationController
 
   def show
     @comment = Comment.find(params[:id])
+    @link = @comment.link
     render :show
   end
 end
