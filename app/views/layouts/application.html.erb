@@ -8,10 +8,12 @@
 </head>
 <body>
   <% if current_user %>
-    You are logged in as <%= link_to current_user.username, user_url(current_user) %>
+    <div style="float:left; margin-right:10px;">
+      You are logged in as <%= link_to current_user.username, user_url(current_user) %>.
+    </div>
     <form action="<%= session_url %>" method="post">
       <input type="hidden" name="_method" value="delete">
-      <input type="submit" value="Logout" class="btn btn-warning btn-xs">
+      <input type="submit" value="Logout" class="btn btn-warning btn-small">
     </form>
   <% end %>
 

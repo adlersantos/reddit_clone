@@ -21,6 +21,9 @@ class LinksController < ApplicationController
 
   def show
     @link = Link.find(params[:id])
+    @total_votes = @link.votes.inject(0) do |sum, vote|
+      sum + vote.vote_value
+    end
     render :show
   end
 
@@ -37,12 +40,18 @@ class LinksController < ApplicationController
   end
 
   def upvote
-    @link = Link.find(params[:id])
+    @link = Link.find(params[:link_id])
     ActiveRecord::Base.transaction do
-
+      UserVote.create!(params[:user_vote])
     end
+    redirect_to link_url(@link)
   end
 
   def downvote
+    @link = Link.find(params[:link_id])
+    ActiveRecord::Base.transaction do
+      UserVote.create!(params[:user_vote])
+    end
+    redirect_to link_url(@link)
   end
 end
