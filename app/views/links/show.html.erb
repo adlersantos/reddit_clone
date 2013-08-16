@@ -8,9 +8,8 @@ Description: <br>
 
 Comments: <br>
 <% @link.comments_by_parent[nil].each do |comment| %>
-  <%= comment.body %>
-  <%= render "comment", :parent => comment, :comments_by_parent => @link.comments_by_parent %>
-<% end %>
+  <ul><%= render "comment", :parent => comment, :comments_by_parent => @link.comments_by_parent %></ul>
+<% end %> <br>
 
 <form action="<%= comments_url %>" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
@@ -20,7 +19,7 @@ Comments: <br>
 
   <input type="hidden" name="comment[author_id]" value="<%= current_user.id %>">
   <input type="hidden" name="comment[link_id]" value="<%= @link.id %>"> <br>
-  <input type="submit" value="Add Comment">
+  <input type="submit" value="Post Comment">
 </form> <br>
 
 Included in the following subs: <br>
@@ -29,3 +28,4 @@ Included in the following subs: <br>
     <li><%= sub.name %></li>
   <% end %>
 </ul>
+
