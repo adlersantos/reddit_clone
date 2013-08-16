@@ -8,4 +8,9 @@ class CommentsController < ApplicationController
       render :back
     end
   end
+
+  def show
+    @comment = Comment.find(params[:id])
+    render :show
+  end
 end

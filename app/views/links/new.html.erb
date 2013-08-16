@@ -10,16 +10,20 @@
   <input type="text" name="link[url]" id="title"> <br>
 
   <label for="description">Description:</label> <br>
-  <textarea name="link[description]" id="description" cols="30" rows="10"></textarea> <br>
+  <textarea name="link[description]" id="description" cols="30" rows="10"></textarea>
 
   <% unless @all_subs.empty? %>
-    Select Subs: <br>
+    <h4>Select Subs:</h4>
     <% @all_subs.each do |sub| %>
       <small><%= sub.name %>:</small>
       <input type="checkbox" name="link[sub_ids][]" value="<%= sub.id %>"> <br>
     <% end %>
   <% end %>
 
+  <h4>Comment:</h4>
+  <textarea name="comment[body]" id="" cols="15" rows="5"></textarea>
+
+  <input type="hidden" name="comment[author_id]" value="<%= current_user.id %>">
   <input type="hidden" name="link[owner_id]" value="<%= current_user.id %>">
   <input type="submit" value="Share Link">
 </form>

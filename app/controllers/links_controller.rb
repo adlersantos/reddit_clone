@@ -5,13 +5,14 @@ class LinksController < ApplicationController
   end
 
   def create
-    @link = Link.new(params[:link])
-    if @link.save
-      redirect_to link_url(@link)
-    else
-      flash.notice = "Link submission failed."
-      render :new
+    ActiveRecord::Base.transaction do
+      @link = Link.create!(params[:link])
+
+      @comment = Comment.new(params[:comment])
+      @comment.link_id = @link.id
+      @comment.save!
     end
+    redirect_to link_url(@link)
   end
 
   def show
