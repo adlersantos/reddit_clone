@@ -1,6 +1,8 @@
 class LinksController < ApplicationController
   before_filter :authenticate_user
 
+  include LinksHelper
+
   def new
     @all_subs = Sub.all
     render :new
@@ -27,8 +29,9 @@ class LinksController < ApplicationController
                :link_id => @link.id
                )
     @voted = (@votes.empty? ? false : true)
-
-    @total_votes = @link.votes.inject(0) { |sum, vote| sum + vote.vote_value }
+    @total_votes = @link.votes.inject(0) do |sum, vote|
+      sum + vote.vote_value
+    end
     render :show
   end
 
@@ -51,18 +54,10 @@ class LinksController < ApplicationController
   end
 
   def upvote
-    @link = Link.find(params[:link_id])
-    ActiveRecord::Base.transaction do
-      UserVote.create!(params[:user_vote])
-    end
-    redirect_to link_url(@link)
+    perform_vote
   end
 
   def downvote
-    @link = Link.find(params[:link_id])
-    ActiveRecord::Base.transaction do
-      UserVote.create!(params[:user_vote])
-    end
-    redirect_to link_url(@link)
+    perform_vote
   end
 end

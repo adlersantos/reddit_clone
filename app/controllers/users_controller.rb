@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       redirect_to user_url(@user)
     else
       flash[:errors] ||= []
-      flash[:errors] << "Sign up failed."
+      flash[:errors] << "Username is already taken."
       render :new
     end
   end

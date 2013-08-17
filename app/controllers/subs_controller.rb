@@ -3,7 +3,6 @@ class SubsController < ApplicationController
 
   def new
     @sub = Sub.new
-    3.times { @sub.links.build }
     render :new
   end
 
