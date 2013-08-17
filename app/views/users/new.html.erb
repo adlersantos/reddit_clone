@@ -1,4 +1,4 @@
-<h1>Create Account</h1>
+<h2>Create Account</h2>
 
 <form action="<%= users_url %>" method="POST">
   <label for="username">Username:</label>
@@ -9,3 +9,5 @@
 
   <input type="submit" value="Sign up" class="btn btn-success">
 </form>
+
+Already have an account? <%= link_to "Login here.", new_session_url %>

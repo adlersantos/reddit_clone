@@ -34,20 +34,22 @@ class Link < ActiveRecord::Base
   def comments_by_parent
     comments_by_parent = {}
 
-    top_comments = comments.where(:parent_comment_id => nil)
-    top_comments.each do |comment|
-      comments_by_parent[nil] ||= []
-      comments_by_parent[nil] << comment
-    end
-
-    child_comments = comments.all - top_comments
-    child_comments.each do |comment|
-      parent_comment = Comment.find_by_id(comment.parent_comment_id)
-      comments_by_parent[parent_comment] ||= []
-      comments_by_parent[parent_comment] << comment
+    pid_column = 'comments.parent_comment_id'
+    ['IS NULL', 'IS NOT NULL'].each do |nullness|
+      condition = pid_column + ' ' + nullness
+      populate_parents(condition, comments_by_parent)
     end
 
     comments_by_parent
+  end
+
+  def populate_parents(condition, hash)
+    children = comments.nil? ? [] : comments.where(condition)
+    children.each do |child|
+      parent = Comment.find_by_id(child.parent_comment_id)
+      hash[parent] ||= []
+      hash[parent] << child
+    end
   end
 
   def total_votes
