@@ -29,6 +29,8 @@ class Link < ActiveRecord::Base
     :primary_key => :id,
     :foreign_key => :owner_id
 
+  validates :title, :url, :presence => true
+
   def comments_by_parent
     comments_by_parent = {}
 
