@@ -5,10 +5,11 @@
 
   <label for="sub_name">Name:</label>
   <input type="text" name="sub[name]"> <br>
-  <br>
 
+  <h3>Links:</h3>
   <% 3.times.each do |index| %>
-    <label for="">Name:</label>
+  <div style="float:left; margin-right:10px;">
+    <label for="">Title:</label>
     <input type="hidden" name="sub[links_attributes][<%= index %>][title]" value="">
     <input type="text" name="sub[links_attributes][<%= index %>][title]"> <br>
 
@@ -16,10 +17,14 @@
     <input type="hidden" name="sub[links_attributes][<%= index %>][url]" value="">
     <input type="text" name="sub[links_attributes][<%= index %>][url]"> <br>
 
-    <label for="">Description:</label> <br>
+    <label for="">Description:</label>
     <input type="hidden" name="sub[links_attributes][<%= index %>][description]" value="">
     <textarea name="sub[links_attributes][<%= index %>][description]"></textarea> <br>
+  </div>
   <% end %>
+
+  <div style="float:right;"></div>
+  <div style="clear:both;"></div>
   <br>
 
   <input type="hidden" name="sub[moderator_id]" value="<%= current_user.id %>">
