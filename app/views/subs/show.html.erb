@@ -2,7 +2,7 @@
 
 <h4>Links:</h4>
 <% @sub.links.each do |link| %>
-  Title: <%= link.title %> <br>
-  URL: <%= link.url %> <br>
-  Description: <%= link.description %> <br> <br>
+  <strong>Title:</strong> <%= link.title %> <br>
+  <strong>URL:</strong> <%= link_to "#{link.url}", "http://#{link.url}" %> <br>
+  <strong>Description:</strong> <%= link.description %> <br> <br>
 <% end %>

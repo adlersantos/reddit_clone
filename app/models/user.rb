@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
 
   attr_accessible :password, :session_token, :username
 
+  validates :username, :password, :presence => true
+  validates :username, :uniqueness => true
+
   has_many :owned_subs,
     :class_name => "Sub",
     :primary_key => :id,

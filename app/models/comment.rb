@@ -1,6 +1,8 @@
 class Comment < ActiveRecord::Base
   attr_accessible :author_id, :body, :link_id, :parent_comment_id
 
+  validates :body, :presence => true
+
   belongs_to :author,
     :class_name => "User",
     :primary_key => :id,
