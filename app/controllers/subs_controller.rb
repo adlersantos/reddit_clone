@@ -29,6 +29,12 @@ class SubsController < ApplicationController
     end
   end
 
+  def destroy
+    @sub = Sub.find(params[:id])
+    @sub.destroy
+    redirect_to :back
+  end
+
   def edit
     @sub = Sub.find(params[:id])
     render :edit
